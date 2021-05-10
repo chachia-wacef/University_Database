@@ -1,0 +1,224 @@
+delete from enseignant cascade constraints;
+delete from salgrade cascade constraints;
+delete from departement cascade constraints;
+delete from agenda cascade constraints;
+delete from activites cascade constraints;
+delete from alertes cascade constraints;
+delete from agendadept cascade constraints;
+delete from activitesdept cascade constraints;
+delete from absent cascade constraints;
+delete from procesverbal cascade constraints;
+delete from typeact cascade constraints;
+
+ALTER TABLE agenda disable CONSTRAINT ag_PK cascade;
+ALTER TABLE typeact disable CONSTRAINT ta_PK cascade;
+ALTER TABLE salgrade disable CONSTRAINT sa_PK cascade;
+ALTER TABLE activitesdept disable CONSTRAINT ad_PK cascade;
+ALTER TABLE alertes disable CONSTRAINT al_PK cascade;
+ALTER TABLE activites disable CONSTRAINT ac_PK cascade;
+ALTER TABLE procesverbal disable CONSTRAINT pr_PK cascade;
+ALTER TABLE departement disable CONSTRAINT de_PK cascade;
+ALTER TABLE enseignant disable CONSTRAINT en_PK cascade;
+ALTER TABLE agendadept disable CONSTRAINT dp_PK cascade;
+ALTER TABLE absent disable CONSTRAINT ab_PK cascade;
+ALTER TABLE activitesdept disable CONSTRAINT ad_dp_FK cascade;
+ALTER TABLE activitesdept disable CONSTRAINT ad_ta_FK cascade; 
+ALTER TABLE alertes disable CONSTRAINT al_ac_FK cascade ;
+ALTER TABLE activites disable CONSTRAINT ac_ag_FK cascade ;
+ALTER TABLE departement disable CONSTRAINT de_en_FK cascade;
+ALTER TABLE activites disable CONSTRAINT ac_ta_FK cascade ;
+ALTER TABLE agendadept disable CONSTRAINT dp_de_FK cascade;
+ALTER TABLE agenda disable CONSTRAINT ag_en_FK cascade ;
+ALTER TABLE absent disable CONSTRAINT ab_ad_FK cascade;
+ALTER TABLE absent disable CONSTRAINT ab_en_FK cascade;
+ALTER TABLE enseignant disable CONSTRAINT en_sa_FK cascade ;
+ALTER TABLE enseignant disable CONSTRAINT en_de_FK cascade;
+ALTER TABLE enseignant disable CONSTRAINT en_en_FK cascade ;
+ALTER TABLE procesverbal disable CONSTRAINT pr_ad_FK cascade;
+
+COMMIT;
+
+
+INSERT INTO agenda VALUES(1,1,to_date('08-15-18','MM-DD-YY'));
+
+INSERT INTO agenda VALUES(2,2,to_date('04-21-18','MM-DD-YY'));
+
+INSERT INTO agenda VALUES(3,3,to_date('09-19-18','MM-DD-YY'));
+
+INSERT INTO agenda VALUES(4,4,to_date('10-10-18','MM-DD-YY'));
+
+INSERT INTO agenda VALUES(5,5,to_date('08-15-18','MM-DD-YY'));
+
+COMMIT;
+
+INSERT INTO typeact VALUES(1,'réunion');
+
+INSERT INTO typeact VALUES(2,'cours');
+
+INSERT INTO typeact VALUES(3,'mini_projet');
+
+INSERT INTO typeact VALUES(4,'séminaire');
+
+COMMIT;
+
+INSERT INTO salgrade VALUES(1,'professeur',2000,3000);
+
+INSERT INTO salgrade VALUES(2,'assistant',1200,2000);
+
+INSERT INTO salgrade VALUES(3,'stagiaire',1000,1200);
+
+COMMIT;
+
+INSERT INTO activitesdept VALUES(1,1,'challenge c',to_date('12-11-19','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('12:00','hh24:MI'),to_date('11-10-19','MM-DD-YY'),'tabbane',3);
+
+INSERT INTO activitesdept VALUES(2,2,'pacte partie 1',to_date('11-11-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('12:00','hh24:MI'),to_date('01-10-20','MM-DD-YY'),'faten',3);
+
+INSERT INTO activitesdept VALUES(3,2,'pacte partie 2',to_date('12-12-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('12:00','hh24:MI'),to_date('02-10-20','MM-DD-YY'),'faten',3);
+
+INSERT INTO activitesdept VALUES(4,1,'évaluation du lannée précédente',to_date('12-11-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('12:00','hh24:MI'),to_date('07-15-20','MM-DD-YY'),'malek',1);
+
+INSERT INTO activitesdept VALUES(5,3,'création du club robotique',to_date('01-22-20','MM-DD-YY'),to_date('15:00','hh24:MI'),to_date('16:00','hh24:MI'),to_date('01-02-20','MM-DD-YY'),'ksontini',3);
+
+INSERT INTO activitesdept VALUES(6,3,'challenge dentreprendre 1 ',to_date('01-09-20','MM-DD-YY'),to_date('19:00','hh24:MI'),to_date('13:00','hh24:MI'),to_date('01-03-20','MM-DD-YY'),'ksontini',4);
+
+INSERT INTO activitesdept VALUES(7,3,'challenge dentreprendre 2',to_date('01-09-20','MM-DD-YY'),to_date('14:00','hh24:MI'),to_date('16:00','hh24:MI'),to_date('01-02-20','MM-DD-YY'),'ksontini',4);
+
+INSERT INTO activitesdept VALUES(8,1,'langage java',to_date('04-11-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('12:00','hh24:MI'),to_date('03-10-20','MM-DD-YY'),'bouhoula',2);
+
+
+COMMIT;
+
+INSERT INTO alertes VALUES('email',to_date('12-11-19','MM-DD-YY'),1,1);
+
+INSERT INTO alertes VALUES('sms',to_date('12-13-19','MM-DD-YY'),2,2);
+
+COMMIT;
+
+
+INSERT INTO activites VALUES(1,1,'hash_covid19',to_date('04-10-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('01-15-20','MM-DD-YY'),'tabbane','professionnelle',1);
+
+
+INSERT INTO activites VALUES(2,4,'blockchain introduction 1',to_date('03-11-20','MM-DD-YY'),to_date('10:00','hh24:MI'),to_date('12:00','hh24:MI'),to_date('01-23-20','MM-DD-YY'),'bouhoula','professionnelle',1);
+
+
+INSERT INTO activites VALUES(2,4,'blockchain introduction 2',to_date('04-30-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('01-29-20','MM-DD-YY'),'bouhoula','professionnelle',1);
+
+INSERT INTO activites VALUES(3,5,'langage PHP',to_date('04-19-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('01-17-20','MM-DD-YY'),'malek','professionnelle',1);
+
+INSERT INTO activites VALUES(4,1,'projet cloud',to_date('04-10-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('01-15-20','MM-DD-YY'),'tabbane','professionnelle',1);
+
+INSERT INTO activites VALUES(5,1,'trés bonne competition',to_date('01-15-21','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('01-17-20','MM-DD-YY'),'tabbane','personnelle',3);
+
+INSERT INTO activites VALUES(6,5,'hash-code1',to_date('12-10-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('02-23-20','MM-DD-YY'),'malek','professionnelle',2);
+
+INSERT INTO activites VALUES(6,2,'hash-code2',to_date('12-10-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('02-23-20','MM-DD-YY'),'bouhoula','professionnelle',2);
+
+INSERT INTO activites VALUES(6,2,'hash-code3',to_date('12-10-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('02-23-20','MM-DD-YY'),'malek','professionnelle',2);
+
+INSERT INTO activites VALUES(7,2,'trés bonne competition',to_date('05-15-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('13:00','hh24:MI'),to_date('03-17-20','MM-DD-YY'),'faten','personnelle',3);
+
+INSERT INTO activites VALUES(8,3,'formation en anglais1',to_date('01-22-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('09:30','hh24:MI'),to_date('11-22-19','MM-DD-YY'),'ksontini','personnelle',3);
+
+INSERT INTO activites VALUES(9,3,'tp linux1',to_date('01-22-20','MM-DD-YY'),to_date('15:00','hh24:MI'),to_date('16:00','hh24:MI'),to_date('01-10-20','MM-DD-YY'),'ksontini','personnelle',2);
+
+INSERT INTO activites VALUES(10,3,'réunion des chefs dappartement',to_date('01-22-20','MM-DD-YY'),to_date('14:30','hh24:MI'),to_date('17:00','hh24:MI'),to_date('12-22-19','MM-DD-YY'),'ksontini','personnelle',1);
+
+INSERT INTO activites VALUES(11,3,'formation en anglais2',to_date('01-22-20','MM-DD-YY'),to_date('08:30','hh24:MI'),to_date('09:30','hh24:MI'),to_date('11-22-19','MM-DD-YY'),'ksontini','personnelle',3);
+
+INSERT INTO activites VALUES(12,3,'tp linux2',to_date('01-22-20','MM-DD-YY'),to_date('10:00','hh24:MI'),to_date('13:00','hh24:MI'),to_date('01-10-20','MM-DD-YY'),'ksontini','personnelle',2);
+
+INSERT INTO activites VALUES(13,3,'réunion avec le ministre',to_date('01-22-20','MM-DD-YY'),to_date('14:30','hh24:MI'),to_date('17:00','hh24:MI'),to_date('12-22-19','MM-DD-YY'),'ksontini','personnelle',1);
+
+
+INSERT INTO activites VALUES(14,4,'journée de programmation',to_date('05-28-20','MM-DD-YY'),to_date('14:30','hh24:MI'),to_date('17:00','hh24:MI'),to_date('03-10-20','MM-DD-YY'),'bouhoula','personnelle',3);
+
+INSERT INTO activites VALUES(15,1,'réunion ds chefs dappartement',to_date('05-28-20','MM-DD-YY'),to_date('18:00','hh24:MI'),to_date('23:00','hh24:MI'),to_date('03-10-20','MM-DD-YY'),'bouhoula','personnelle',1);
+
+COMMIT;
+
+INSERT INTO procesverbal VALUES(1,1,1,'le challenge se passe en des bonnes conditions');
+
+INSERT INTO procesverbal VALUES(2,2,2,'travail acceptable jusqua maintenant');
+
+INSERT INTO procesverbal VALUES(3,3,2,'bon travail');
+
+INSERT INTO procesverbal VALUES(4,4,1,'pas de nouveaux décisions');
+
+INSERT INTO procesverbal VALUES(5,5,3,'une journée inoubliable dans lhistoire de cette école');
+
+INSERT INTO procesverbal VALUES(6,6,3,'travail acceptable jusqua maintenant');
+
+INSERT INTO procesverbal VALUES(7,7,3,'bon travail');
+
+INSERT INTO procesverbal VALUES(8,8,1,'pas de remarque');
+
+
+COMMIT;
+
+INSERT INTO departement VALUES(1,1,'IR');
+
+INSERT INTO departement VALUES(2,2,'IN');
+
+INSERT INTO departement VALUES(3,4,'MASC');
+
+INSERT INTO departement VALUES(4,5,'EDGHL');
+
+COMMIT;
+
+
+INSERT INTO enseignant VALUES (1,'sami','tabaane',NULL,36123456,1,1,NULL);
+
+INSERT INTO enseignant VALUES (2,'Faten','Ayachi','ayachi@supcom.tn',98765432,1,1,NULL);
+
+INSERT INTO enseignant VALUES (3,'ksontini','ksontini','ksontini@supcom.tn',01234567,1,2,1);
+
+INSERT INTO enseignant VALUES (4,'Adel','bouhoula','bouhoula@supcom.tn',99876543,1,2,1);
+
+INSERT INTO enseignant VALUES (5,'malek','ben youssef','malek@supcom.tn',12345678,1,4,2);
+
+COMMIT;
+
+
+INSERT INTO absent VALUES(20,2,2,3);
+
+INSERT INTO absent VALUES(11,3,3,7);
+
+COMMIT;
+
+INSERT INTO agendadept VALUES(1,to_date('08-16-17','MM-DD-YY'),1);
+
+INSERT INTO agendadept VALUES(2,to_date('03-01-18','MM-DD-YY'),2);
+
+INSERT INTO agendadept VALUES(3,to_date('04-01-18','MM-DD-YY'),3);
+
+INSERT INTO agendadept VALUES(4,to_date('03-22-18','MM-DD-YY'),4);
+
+COMMIT;
+
+ALTER TABLE agenda enable CONSTRAINT ag_PK cascade;
+ALTER TABLE typeact enable CONSTRAINT ta_PK cascade;
+ALTER TABLE salgrade enable CONSTRAINT sa_PK cascade;
+ALTER TABLE activitesdept enable CONSTRAINT ad_PK cascade;
+ALTER TABLE alertes enable CONSTRAINT al_PK cascade;
+ALTER TABLE activites enable CONSTRAINT ac_PK cascade;
+ALTER TABLE procesverbal enable CONSTRAINT pr_PK cascade;
+ALTER TABLE departement enable CONSTRAINT de_PK cascade;
+ALTER TABLE enseignant enable CONSTRAINT en_PK cascade;
+ALTER TABLE agendadept enable CONSTRAINT dp_PK cascade;
+ALTER TABLE absent enable CONSTRAINT ab_PK cascade;
+ALTER TABLE activitesdept enable CONSTRAINT ad_dp_FK cascade;
+ALTER TABLE activitesdept enable CONSTRAINT ad_ta_FK cascade; 
+ALTER TABLE alertes enable CONSTRAINT al_ac_FK cascade; 
+ALTER TABLE activites enable CONSTRAINT ac_ag_FK cascade; 
+ALTER TABLE departement enable CONSTRAINT de_en_FK cascade;
+ALTER TABLE activites enable CONSTRAINT ac_ta_FK cascade; 
+ALTER TABLE agenda_departemental enable CONSTRAINT dp_de_FK cascade;
+ALTER TABLE agenda enable CONSTRAINT ag_en_FK cascade; 
+ALTER TABLE absent enable CONSTRAINT ab_ad_FK cascade;
+ALTER TABLE absent enable CONSTRAINT ab_en_FK cascade;
+ALTER TABLE enseignant enable CONSTRAINT en_sa_FK cascade; 
+ALTER TABLE enseignant enable CONSTRAINT en_de_FK cascade;
+ALTER TABLE enseignant enable CONSTRAINT en_en_FK cascade; 
+ALTER TABLE procesverbal enable CONSTRAINT pr_ad_FK cascade;
+
+COMMIT;

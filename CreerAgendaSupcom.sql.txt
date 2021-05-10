@@ -1,0 +1,150 @@
+drop table enseignant cascade constraints ;
+/
+drop table salgrade cascade constraints ; 
+/
+drop table departement cascade constraints ; 
+/
+drop table agenda cascade constraints ;
+/
+drop table activites cascade constraints ;
+/
+drop table alertes cascade constraints ;
+/
+drop table agendadept cascade constraints ;
+/
+drop table activitesdept cascade constraints ;
+/
+drop table absent cascade constraints ;
+/
+drop table procesverbal cascade constraints ;
+/
+drop table typeact cascade constraints ;
+/
+
+
+create table agenda(
+numagenda number(3),
+num_enseignant number(3),
+datecreation date)
+/
+
+create table typeact(
+numtype number(3),
+nomtype varchar2(30))
+/
+
+create table salgrade(
+numgrade number(3),
+intitule varchar2(30),
+losal number(7,2),
+hisal number(7,2))
+/
+create table activitesdept(
+numact number(3) ,
+numagenda number(3),
+descript varchar2(100),
+dateact date,
+hdébut date,
+hfin date,
+date_creation date,
+createur varchar2(30),
+numtype number(3))
+/
+create table alertes(
+type varchar2(30),
+delais date,
+numact number(3),
+numagenda number(3))
+/
+create table activites(
+numact number(3),
+numagenda number(3),
+descript varchar2(100),
+dateact date,
+hdébut date,
+hfin date,
+datecreation date,
+createur varchar2(30),
+visible varchar2(30),
+numtype number(3))
+/
+create table procesverbal(
+numproces number(3) ,
+numact number(3),
+numagenda number(3),
+resume varchar2(100))
+/
+create table departement(
+numdep number(3),
+num_enseignant number(3),
+nom varchar2(30))
+/
+
+create table enseignant(
+num_enseignant number(3),
+nom varchar2(30),
+prenom varchar2(30),
+email varchar2(50) ,
+telinterne number(10),
+numgrade number(3),
+numdep number(3),
+numpatron number(3))
+/
+create table absent(
+motif number(3),
+numagenda number(3),
+num_enseignant number(3),
+numact number(3))
+/
+create table agendadept(
+numagenda number(3) ,
+datecreation date,
+numdep number(3))
+/
+
+
+
+ALTER TABLE agenda ADD CONSTRAINT ag_PK PRIMARY KEY (numagenda);
+ALTER TABLE typeact ADD CONSTRAINT ta_PK PRIMARY KEY (numtype);
+ALTER TABLE salgrade ADD CONSTRAINT sa_PK PRIMARY KEY (numgrade);
+ALTER TABLE activitesdept ADD CONSTRAINT ad_PK PRIMARY KEY (numact,numagenda);
+ALTER TABLE alertes ADD CONSTRAINT al_PK PRIMARY KEY (type);
+ALTER TABLE activites ADD CONSTRAINT ac_PK PRIMARY KEY (numact,numagenda);
+ALTER TABLE procesverbal ADD CONSTRAINT pr_PK PRIMARY KEY (numproces);
+ALTER TABLE departement ADD CONSTRAINT de_PK PRIMARY KEY (numdep);
+ALTER TABLE enseignant ADD CONSTRAINT en_PK PRIMARY KEY (num_enseignant);
+ALTER TABLE agendadept ADD CONSTRAINT dp_PK PRIMARY KEY (numagenda);
+ALTER TABLE absent ADD CONSTRAINT ab_PK PRIMARY KEY (numact,numagenda,num_enseignant);
+
+ALTER TABLE activitesdept ADD CONSTRAINT ad_dp_FK FOREIGN KEY(numagenda) REFERENCES agendadept(numagenda); 
+ALTER TABLE activitesdept ADD CONSTRAINT ad_ta_FK FOREIGN KEY(numtype) REFERENCES typeact(numtype); 
+ALTER TABLE alertes ADD CONSTRAINT al_ac_FK FOREIGN KEY(numact,numagenda) REFERENCES activites(numact,numagenda); 
+ALTER TABLE activites ADD CONSTRAINT ac_ag_FK FOREIGN KEY(numagenda) REFERENCES agenda(numagenda); 
+ALTER TABLE departement ADD CONSTRAINT de_en_FK FOREIGN KEY(num_enseignant) REFERENCES enseignant(num_enseignant);
+ALTER TABLE activites ADD CONSTRAINT ac_ta_FK FOREIGN KEY(numtype) REFERENCES typeact(numtype); 
+ALTER TABLE agendadept ADD CONSTRAINT dp_de_FK FOREIGN KEY(numdep) REFERENCES departement(numdep);
+ALTER TABLE agenda ADD CONSTRAINT ag_en_FK FOREIGN KEY(num_enseignant) REFERENCES enseignant(num_enseignant); 
+ALTER TABLE absent ADD CONSTRAINT ab_ad_FK FOREIGN KEY(numact,numagenda) REFERENCES activitesdept(numact,numagenda); 
+ALTER TABLE absent ADD CONSTRAINT ab_en_FK FOREIGN KEY(num_enseignant) REFERENCES enseignant(num_enseignant);
+ALTER TABLE enseignant ADD CONSTRAINT en_sa_FK FOREIGN KEY(numgrade) REFERENCES salgrade(numgrade); 
+ALTER TABLE enseignant ADD CONSTRAINT en_de_FK FOREIGN KEY(numdep) REFERENCES departement(numdep);
+ALTER TABLE enseignant ADD CONSTRAINT en_en_FK FOREIGN KEY(numpatron) REFERENCES enseignant(num_enseignant); 
+ALTER TABLE procesverbal ADD CONSTRAINT pr_ad_FK FOREIGN KEY(numact,numagenda) REFERENCES activitesdept(numact,numagenda);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
